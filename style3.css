@@ -1,0 +1,177 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('27771233ffd5cc45625e3ff061a208aa.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Pacifico', cursive; /* playful, handwritten style */
+}
+/* ==========================
+   COVER / LIBRARY LAYOUT
+========================== */
+.cover {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+  background: #dfe4bf; /* subtle background behind previews */
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  box-sizing: border-box;
+  position: relative; /* needed for overlay positioning */
+}
+
+/* ==========================
+   DOCUMENT PREVIEW CARDS
+========================== */
+.doc-preview {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  width: 280px;
+  min-height: 400px;
+  padding: 25px 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: 'Georgia', serif;
+  color: #222;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  position: relative; /* for overlay */
+}
+
+.doc-preview:hover,
+.doc-preview:focus {
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  transform: scale(1.03);
+  outline: none;
+}
+
+.doc-preview h2 {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  font-family: 'Pacifico', cursive;
+}
+
+/* Blur effect: everything except the title */
+.doc-preview > :not(h2) {
+  filter: blur(6px);          /* blur content */
+  user-select: none;           /* prevent text selection */
+  pointer-events: none;        /* prevent hover/click on text/images */
+}
+
+/* Optional overlay for hint */
+.doc-preview::after {
+  content: "Click to view";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #c8e6ad;
+  color: rgb(0, 0, 0);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  pointer-events: none;       /* allow click on card */
+  font-family: 'Pacifico', cursive;
+}
+
+.doc-preview p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-family: 'Pacifico', cursive;
+  margin-bottom: 12px;
+  white-space: pre-line; /* respects line breaks */
+}
+
+
+.doc-preview img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: auto; /* push image to bottom if space */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  object-fit: cover;
+  max-height: 130px;
+}
+
+/* ==========================
+   BACK TO MAIN PAGE BUTTON
+========================== */
+.back {
+  display: inline-block;       /* makes <a> behave like a button */
+  padding: 12px 25px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: #c8e6ad;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pacifico', cursive;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;       /* remove underline */
+  position: fixed;             /* always in upper-right corner */
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.back:hover {
+  background-color: #e5f4ce;
+}
+
+/* ==========================
+   RESPONSIVE ADJUSTMENTS
+========================== */
+@media (max-width: 800px) {
+  .cover {
+    flex-direction: column;
+    align-items: center;
+  }
+  .doc-preview {
+    width: 80%;
+  }
+}
+/* Container to hold flowers */
+#flower-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* so clicks pass through */
+  overflow: hidden;
+  z-index: 10; /* behind back button if needed */
+}
+
+/* Individual flower animation */
+.flower {
+  position: absolute;
+  bottom: -50px; /* start below the screen */
+  width: 100px;
+  height: 100px;
+  background-image: url('680ca64edbb6c409dac1c3d2043e383a-removebg-preview.png'); /* replace with your flower image */
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: floatUp linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
